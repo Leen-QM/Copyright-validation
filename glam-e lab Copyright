@@ -73,3 +73,4 @@ flowchart TD
     D3 -->|Organization created metadata| E3[Organization owns copyright - Marked CC0]
     D3 -->|Contractor created metadata| F3[Remove excessive metadata - publish the record with basic metadata - Marked CC0]
     end
+```
