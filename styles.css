@@ -24,6 +24,12 @@ header{
 
 }
 
+.description{
+  font-size: 12px;
+  color: grey;
+  font-family:  sans-serif;
+}
+
 main {
   max-width: 800px;
   width: 100%;
