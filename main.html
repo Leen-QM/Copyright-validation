@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Copyright Assessment Tool</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <main>
+    <header>
+      <h1 class="text">Interactive Copyright Assessment Tool</h1>
+      <p>Select your Copyright framework to start the assessment</p>
+    </header>
+    <section id="framework-selection">
+      <label for="framework">Select Framework:</label>
+      <select id="framework" onchange="showFrameworkQuestion()">
+        <option value="" disabled selected>--Select Framework--</option>
+        <option value="glam-e-lab">Glam-E Lab</option>
+        <option value="qm-emu">QM Emu</option>
+      </select>
+    </section>
+
+    <!-- QM Questions (initially hidden) -->
+    <section id="QM-EMu-selection" class=hidden>
+      <label for="artist">Is the artist alive?</label>
+      <select id="artist" onchange="handleQMQuestion()">
+        <option value="" disabled selected>--Select Answer--</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </section>
+
+    <section id="QM-artist-death-date" class=hidden>
+      <label for="artist-death-date">Did the artist die before 1975?</label>
+      <select id="artist-death-date" onchange="handleQM_deathDateQuestion()">
+        <option value="" disabled selected>--Select Answer--</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+    </section>
+
+    <!-- Region section (initially hidden) -->
+    <section id="region-selection" class="hidden">
+      <label for="region">Select Region:</label>
+      <select id="region" onchange="handleRegionQuestion()">
+        <option value="" disabled selected>--Select Region--</option>
+        <option value="us">United States</option>
+        <option value="uk-eu">UK & EU</option>
+      </select>
+    </section>
+
+    <section id="questions-section" class="hidden">
+      <!-- US Questions -->
+      <div id="us-questions" class="jurisdiction-questions">
+        <h2>United States Copyright Assessment</h2>
+        <label for="work-eligible">Is the underlying work eligible for copyright protection?</label>
+        <select id="work-eligible" onchange="handleUSQuestion()">
+          <option value="" disabled selected>--Select Answer--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+
+        <div id="us-yes-questions" class="hidden">
+          <label for="work-published">Was the work published?</label>
+          <select id="work-published" onchange="handlePublicationQuestion()">
+            <option value="" disabled selected>--Select Answer--</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          <div id="work-published-questions" class="hidden">
+            <label for="publication-date">When was the work published?</label>
+            <select id="publication-date" onchange="handleDateQuestion()">
+              <option value="" disabled selected>--Select Date Range--</option>
+              <option value="before-1930">On or before December 31, 1930</option>
+              <option value="after-1978">After January 1, 1978</option>
+              <option value="between-1928-1978">Between January 1, 1928 and January 1, 1978</option>
+            </select>
+
+            <div id="date-range-questions" class="hidden">
+              <label for="us-domestic-or-foreign">Is the work domestic or foreign?</label>
+              <select id="us-domestic-or-foreign" onchange="handleDomesticQuestion()">
+                <option value="" disabled selected>--Select Answer--</option>
+                <option value="domestic">Domestic (Published in the US)</option>
+                <option value="foreign">Foreign</option>
+              </select>
+
+              <div id="domestic-questions" class="hidden">
+                <label for="meet_renewal">Does the work meet registration and renewal requirements?</label>
+                <select id="meet_renewal" onchange="handleRenewalQuestion()">
+                  <option value="" disabled selected>--Select Answer--</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UK & EU Questions -->
+      <div id="uk-eu-questions" class="jurisdiction-questions">
+        <h2>UK & EU Copyright Assessment</h2>
+        <label for="creator-identified">Do you know who created the underlying work?</label>
+        <select id="creator-identified" onchange="handleUKEUQuestion()">
+          <option value="" disabled selected>--Select Answer--</option>
+          <option value="yes">Yes</option>
+          <option value="no">No</option>
+        </select>
+
+        <div id="uk-eu-yes-questions" class="hidden">
+          <label for="work-published-uk-eu">Is the work published?</label>
+          <select id="work-published-uk-eu" onchange="handleUKEUPublishedQuestion()">
+            <option value="" disabled selected>--Select Answer--</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+
+          <div id="uk-eu-death-date" class="hidden">
+            <label for="death-date">Check Creator's Death Date:</label>
+            <select id="death-date" onchange="handleCheckExpirationQuestion()">
+              <option value="" disabled selected>--Select Answer--</option>
+              <option value="expired">Copyright expired</option>
+              <option value="not-expired">Copyright not expired</option>
+              <option value="unsure">Unsure</option>
+            </select>
+
+            <div id="uk-eu-Foreign-work" class="hidden">
+              <label for="short-term">If the work is foreign, does the rule of shorter term apply?</label>
+              <select id="short-term" onchange="handleForeignWorkQuestion()">
+                <option value="" disabled selected>--Select Answer--</option>
+                <option value="yes">Yes</option>
+                <option value="no">No</option>
+              </select>
+
+              <div id="uk-eu-copyright-expiration" class="hidden">
+                <label for="copyright-expiration">Has the copyright expired?</label>
+                <select id="copyright-expiration" onchange="handleCopyrightExpirationQuestion()">
+                  <option value="" disabled selected>--Select Answer--</option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Checklist 2 Section (initially hidden) -->
+      <div id="checklist-2" class="hidden">
+        <h2>Checklist 2: The Digital Surrogate</h2>
+        <label for="digital-surrogate">Is the digital surrogate a faithful reproduction of the underlying work?</label>
+        <select id="digital-surrogate" onchange="handleChecklist2Question()">
+          <option value="" disabled selected>--Select Answer--</option>
+          <option value="yes">Yes</option>
+          <option value="unsure">Unsure</option>
+        </select>
+
+        <div id="ch2-digitization-incorprate" class="hidden">
+          <label for="digitization-incorprate">Did digitization incorporate sufficiently create choices of the person who made it?</label>
+          <select id="digitization-incorprate" onchange="handleIncorprateQuestion()">
+            <option value="" disabled selected>--Select Answer--</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+
+        <div id="ch2-digital-surrogate" class="hidden">
+          <label for="ch2-surrogate">Who made the digital surrogate?</label>
+          <select id="ch2-surrogate" onchange="handleCh2DigitalSurrogateQuestion()">
+            <option value="" disabled selected>--Select Answer--</option>
+            <option value="organization">Organization</option>
+            <option value="contractor">Contractor</option>
+          </select>
+        </div>
+
+        <div id="ch2-rights" class="hidden">
+          <label for="rights">Based on the contract, who assigned the rights?</label>
+          <select id="rights" onchange="handleCh2RightsQuestion()">
+            <option value="" disabled selected>--Select Answer--</option>
+            <option value="organization">Rights assigned to organization</option>
+            <option value="contractor">Rights retained by contractor</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Checklist 3 Section (initially hidden) -->
+      <div id="checklist-3" class="hidden">
+        <h2>Checklist 3: The Meta Data</h2>
+        <label for="meta-data">What type of metadata is there?</label>
+        <select id="meta-data" onchange="handleChecklist3Question()">
+          <option value="" disabled selected>--Select Answer--</option>
+          <option value="basic">Basic metadata</option>
+          <option value="expressive">Expressive metadata</option>
+        </select>
+
+        <div id="ch3-expressive-meta-data" class="hidden">
+          <label for="expressive-meta-data">Who created the more expressive metadata?</label>
+          <select id="expressive-meta-data" onchange="handleMetaDataQuestion()">
+            <option value="" disabled selected>--Select Answer--</option>
+            <option value="organization">Organization</option>
+            <option value="contractor">Contractor</option>
+          </select>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- Results Section -->
+    <section id="results" class="hidden">
+      <h2>Assessment Result:</h2>
+      <p id="result-text">The work is in the public domain.</p>
+    </section>
+
+    <!-- Reset Button -->
+    <button id="reset-button" onclick="resetForm()">Reset</button>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Copyright Assessment Tool</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
