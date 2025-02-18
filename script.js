@@ -65,7 +65,7 @@ function handlePublicationQuestion() {
       .classList.remove("hidden");
   } else {
     document.getElementById("work-published-questions").classList.add("hidden");
-    showResult("The work is in the public domain.");
+    showResult("Remove work for further review.");
   }
 }
 
