@@ -280,4 +280,5 @@ function resetForm() {
   document.getElementById("ch2-rights").classList.add("hidden");
   document.getElementById("QM-EMu-selection").classList.add("hidden");
   document.getElementById("QM-artist-death-date").classList.add("hidden");
+  document.getElementById("region-selection").classList.add("hidden");
 }
